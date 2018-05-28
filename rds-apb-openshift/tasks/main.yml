@@ -49,3 +49,20 @@
 #       DB_PASSWORD: "{{ db_password }}"
 #       DB_NAME: "{{ db_name }}"
 #       DB_TYPE: postgres
+
+- name: Create Kube Secrets
+  k8s_raw:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: "rds-{{ tds }}"
+        namespace: "{{ namespace }}"
+      type: Opaque
+      data:
+        DB_HOST: "{{ rds_endpoint_ip.stdout | b64encode }}"
+        DB_PORT: "{{ port | b64encode }}"
+        DB_USER: "{{ db_username | b64encode }}"
+        DB_PASSWORD: "{{ db_password | b64encode }}"
+        DB_NAME: "{{ db_name | b64encode }}"
