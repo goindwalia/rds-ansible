@@ -1,4 +1,5 @@
 ---
+rds_instance_name: "{{ lookup('env','RDS_INSTANCE NAME') }}"
 aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY') }}"
 aws_secret_key: "{{ lookup('env','AWS_SECRET_KEY') }}"
 backup_retention: "{{ lookup('env','BACKUP_RETENTION') | default(0, true) }}"
