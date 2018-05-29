@@ -39,6 +39,7 @@
 
 
 - name: Create Kube Secrets
+  when: state=="present"
   k8s_raw:
     state: "{{ state }}"
     definition:
@@ -54,3 +55,14 @@
         DB_USER: "{{ db_username | b64encode }}"
         DB_PASSWORD: "{{ db_password | b64encode }}"
         DB_NAME: "{{ db_name | b64encode }}"
+
+- name: Delete Kube Secrets
+  when: state=="absent"
+  k8s_raw:
+    state: "{{ state }}"
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: "{{ rds_instance_name }}"
+        namespace: "{{ namespace }}"
