@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  vars:
-      state: 'absent'
-  roles:
-    - role: rds
