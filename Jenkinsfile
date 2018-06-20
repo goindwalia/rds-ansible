@@ -17,14 +17,16 @@ pipeline {
                 echo "flag: ${params.VPC_SECURITY_GROUPS}"
             }
         }
-        stage('Test') {
+        stage('Run Ansible Paybool') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                node {
+                    ansiblePlaybook(
+                        playbook: 'rds-ansible/main.yml',
+                        extraVars: [
+                            VPC_SECURITY_GROUPS: "${params.VPC_SECURITY_GROUPS}",
+                            SUBNET: "${params.SUBNET}"
+                        ])
+                }
             }
         }
     }
