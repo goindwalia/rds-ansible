@@ -19,14 +19,14 @@ pipeline {
         }
         stage('Run Ansible Paybool') {
             steps {
-                node {
-                    ansiblePlaybook(
-                        playbook: 'rds-ansible/main.yml',
-                        extraVars: [
-                            VPC_SECURITY_GROUPS: "${params.VPC_SECURITY_GROUPS}",
-                            SUBNET: "${params.SUBNET}"
-                        ])
-                }
+                
+                ansiblePlaybook(
+                    playbook: 'rds-ansible/main.yml',
+                    extraVars: [
+                        VPC_SECURITY_GROUPS: "${params.VPC_SECURITY_GROUPS}",
+                        SUBNET: "${params.SUBNET}"
+                    ])
+
             }
         }
     }
