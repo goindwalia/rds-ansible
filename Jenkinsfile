@@ -10,9 +10,11 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Debug') {
             steps {
-                echo 'Building..'
+                echo "flag: ${params.REGION}"
+                echo "flag: ${params.SUBNET}"
+                echo "flag: ${params.VPC_SECURITY_GROUPS}"
             }
         }
         stage('Test') {
