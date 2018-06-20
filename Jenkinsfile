@@ -21,7 +21,7 @@ pipeline {
             steps {
                 
                 ansiblePlaybook(
-                    playbook: 'rds-ansible/main.yml',
+                    playbook: '/var/jenkins_home/workspace/test/rds-ansible/main.yml',
                     extraVars: [
                         VPC_SECURITY_GROUPS: "${params.VPC_SECURITY_GROUPS}",
                         SUBNET: "${params.SUBNET}"
